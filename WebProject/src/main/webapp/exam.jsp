@@ -8,5 +8,7 @@
 </head>
 <body>
 	<!-- testA 생성한 둘번째 -->
+	
+	out.print("AAAA");
 </body>
 </html>
