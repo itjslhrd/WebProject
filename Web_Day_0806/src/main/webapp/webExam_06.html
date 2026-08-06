@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<form name="frm" id="" method="post" action="aaa.jsp">
+		<table width=300 border=1>
+			<tr>
+				<td>아이디</td>
+				<td><input type="text" name="id" id=""></td>
+			</tr>
+			<tr>
+				<td>비번</td>
+				<td><input type="password" name="pw" id=""></td>
+			</tr>
+			<tr>
+				<td colspan=2>
+				<!-- onClick 하면 자바스크립트 함수 호출 -->
+					<input type="button" value="로그인" onClick="send()">
+					<input type="button" value="취소" onClick="del()">
+				</td>
+			</tr>
+			<tr>
+				<td colspan=2>
+					<button onClick="send()">로그인</button>
+					<button>취소</button>
+				</td>
+			</tr>
+			
+		
+		</table>
+	</form>
+</body>
+</html>
+
+<script>
+	
+	function send(){
+		// 경고창 뛰우기 :  alert("메시지")
+		if(document.frm.id.value==""){
+			alert("아이디를 입력하세요");	
+			document.frm.id.focus();
+			return;
+		}
+		if(document.frm.pw.value==""){
+			alert("비번를 입력하세요");	
+			document.frm.pw.focus();
+			return;
+		}
+		
+		alert("로그인을 수행합니다");
+		
+		
+	}
+	
+	function del(){
+		alert("등록된 정보를 모두 지우고 다시입력합니다");
+		frm.reset();
+		frm.id.focus();
+	}
+</script>

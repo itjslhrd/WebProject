@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+   table{
+      border:solid black;
+      border-collapse:collapse;
+      width:500px
+   }
+   td{
+      border:1px solid black; 
+      margin-left:1;
+      padding:5px;
+   }
+  .btn_group{text-align: center;}
+</style>
+<script>
+	function send(){
+		// text 유효성 검사
+		if(!member.name.value){
+			
+		}
+		//radio
+		if(!member.gender[0].checked && !member.gender[1].checked){
+			
+		}
+		//checkbox
+		var flag=false;
+		for(i=0; i<member.hobby.length; i++){
+			if(member.hobby[i].checked){
+				flag=true;
+				break;
+			}
+		}
+		if(!flag){
+			//경고
+		}
+		
+		//select
+		if(member.job.selectedIndex==0){
+			
+		}
+		
+		member.submit();
+	}
+	
+	function del(){
+		
+	}
+</script>
+</head>
+<body>
+<form name="member" method="post" action="member_08_ok.jsp">
+<table>
+   <tr>
+      <td colspan=2 align="center">회원가입 폼</td>
+   </tr>
+   <tr>
+     <td width="100">이름</td>
+      <td>
+      <input type="text" name="name" id="name" value="AAAA">
+      </td>
+   </tr>
+   <tr>
+      <td>성별</td>
+      <td>
+      	<input type="radio" name="gender" value="M">남자
+       	<input type="radio" name="gender" value="F">여자
+      </td>
+   </tr>
+   <tr>
+      <td>취미</td>
+      <td>
+      	<input type="checkbox" name="hobby" value="여행">여행
+      	<input type="checkbox" name="hobby" value="영화">영화
+      	<input type="checkbox" name="hobby" value="운동">운동
+      	<input type="checkbox" name="hobby" value="먹방">먹방
+      </td>
+   </tr>
+   <tr>
+      <td>직업</td>
+      <td>
+      	<select name="job">
+      		<option>직업을 선택하세요</option>
+      		<option value="공무원">공무원</option>
+      		<option value="군인">군인</option>
+      		<option value="교육">교육</option>
+      		<option value="학생">학생</option>
+      		<option value="기타">기타</option>
+      	</select>
+      </td>
+   </tr>
+    <tr>
+      <td>소개</td>
+      <td>
+      	 <textarea name="intro" cols=30 rows=4></textarea>     
+      </td>
+   </tr>
+ 
+   <tr>
+      <td colspan=2 class=btn_group>
+      	<input type="button" value="등록" onclick="send()">
+      	<input type="button" value="취소" onclick="del()">
+      </td>
+   </tr>
+</table>
+</form>
+</body>
+</html>

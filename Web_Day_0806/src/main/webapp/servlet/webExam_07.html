@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+   table{
+      border:solid black;
+      border-collapse:collapse;
+      width:500px
+   }
+   td{
+      border:1px solid black; 
+      margin-left:1;
+      padding:5px;
+   }
+  .btn_group{text-align: center;}
+</style>
+<script>
+	function send(){
+		
+		member.submit();
+	}
+	
+	function del(){
+		
+	}
+</script>
+</head>
+<body>
+<form name="member" method="post" action="/memberWrite.do">
+<table>
+   <tr>
+      <td colspan=2 align="center">회원가입 폼</td>
+   </tr>
+   <tr>
+     <td width="100">이름</td>
+      <td>
+      <input type="text" name="name" id="name">
+      </td>
+   </tr>
+   <tr>
+      <td>아이디</td>
+      <td>
+       	<input type="text" name="id">
+      </td>
+   </tr>
+   <tr>
+      <td>비밀번호</td>
+      <td>
+      	<input type="password" name="passwd">
+      </td>
+   </tr>
+      <tr>
+      <td>연락처</td>
+      <td>
+      	<input type="text" name="tel1" size=3>-
+        <input type="text" name="tel2" size=4>-
+        <input type="text" name="tel3" size=5>
+      </td>
+   </tr>
+    <tr>
+      <td>이메일</td>
+      <td>
+      	<input type="text" name="email1">@
+      	<input type="text" name="email2">      
+      </td>
+   </tr>
+ 
+   <tr>
+      <td colspan=2 class=btn_group>
+      	<input type="button" value="등록" onclick="send()">
+      	<input type="button" value="취소" onclick="del()">
+      </td>
+   </tr>
+</table>
+</form>
+</body>
+</html>
