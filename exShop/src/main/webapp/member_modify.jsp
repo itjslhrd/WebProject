@@ -3,14 +3,11 @@
 <%@ page import="java.util.*, java.time.*" %>
 <%@ page import="com.mnu.exshop.model.*" %>    
 <%
-	int custno = (int)request.getAttribute("custno");
+	MemberDTO mdto = (MemberDTO)request.getAttribute("dto");
 	List<CityDTO> list = (List<CityDTO>)request.getAttribute("list");
 	
-	if(custno==0)
-		custno=100000;
-	
-	// 현재 날자 설정
-	LocalDate date = LocalDate.now();
+	//전화번호분리
+	String tel[] = mdto.getPhone().split("-");
 %>    
     
 <!DOCTYPE html>
@@ -91,46 +88,46 @@
 	<div class="section">
 		<section>
 			<div class="content">
-				<h2 class="title">회원등록</h2>
-					<form name="frm" method="post" action="memberWrite">
+				<h2 class="title">회원정보수정</h2>
+					<form name="frm" method="post" action="memberModify">
 						<table>
 							<tr>
-								<th>회원번호(자동발생)</th>
-								<td><input type="text" name="custno" value="<%=custno+1%>" readonly></td>
+								<th>회원번호</th>
+								<td><input type="text" name="custno" value="<%=mdto.getCustno()%>" readonly></td>
 							</tr>
 							<tr>
 								<th>회원성명</th>
-								<td><input type="text" name="custname"></td>
+								<td><input type="text" name="custname" value="<%=mdto.getCustname()%>" readonly></td>
 							</tr>
 							<tr>
 								<th>회원전화</th>
-								<td><input type="text" size="3" name="phone1">-
-									<input type="text" size="4" name="phone2">-
-									<input type="text" size="4" name="phone3">
+								<td><input type="text" size="3" name="phone1" value="<%= tel[0] %>">-
+									<input type="text" size="4" name="phone2" value="<%= tel[1] %>">-
+									<input type="text" size="4" name="phone3" value="<%= tel[2] %>">
 								</td>
 							</tr>
 							<tr>
 								<th>회원성별</th>
-								<td><input type="radio" name="gender" value="M">남자
-								    <input type="radio" name="gender" value="W">여자
+								<td><input type="radio" name="gender" value="M" <%= mdto.getGender().equals("M") ? "checked" : "" %>>남자
+								    <input type="radio" name="gender" value="W" <%= mdto.getGender().equals("F") ? "checked" : "" %>>여자
 								</td>
 							</tr>
 							<tr>
 								<th>가입일자</th>
-								<td><input type="text" name="joindate" value="<%= date %>"></td>
+								<td><input type="text" name="joindate" value="<%= mdto.getJoindate() %>"></td>
 							</tr>
 							<tr>
 								<th>가입일자</th>
-								<td><input type="date" name="joindate1" value="<%= date %>"></td>
+								<td><input type="date" name="joindate1" value=""></td>
 							</tr>
 							<tr>
 								<th>고객등급</th>
 								<td>
 									<select name="grade">
 										<option>고객등급</option>
-										<option value="A">VIP</option>
-										<option value="B">일반</option>
-										<option value="C">직원</option>
+										<option value="A" <%= mdto.getGrade().equals("A") ? "selected":"" %>>VIP</option>
+										<option value="B" <%= mdto.getGrade().equals("B") ? "selected":"" %>>일반</option>
+										<option value="C" <%= mdto.getGrade().equals("C") ? "selected":"" %>>직원</option>
 									</select>
 								</td>
 							</tr>
@@ -140,15 +137,15 @@
 									<select name="city">
 										<option>도시코드</option>
 									<% for(CityDTO dto : list){ %>	
-										<option value="<%= dto.getCity() %>"><%= dto.getCityname() %></option>
+										<option value="<%= dto.getCity() %>" <%= dto.getCity().equals(mdto.getCity()) ? "selected" : "" %>><%= dto.getCityname() %></option>
 									<% } %>	
 									</select>								
 								</td>
 							</tr>
 							<tr>
 								<td colspan="2" class="btn_group">
-									<input type="button" value="등록하기" onClick="send()">
-									<input type="button" value="다시쓰기" onClick="del()">
+									<input type="button" value="수정" onClick="send()">
+									<input type="button" value="취소" onClick="history.back()">
 								</td>
 							</tr>
 						</table>

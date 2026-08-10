@@ -10,20 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mnu.exshop.model.CityDTO;
 import com.mnu.exshop.model.MemberDTO;
 import com.mnu.exshop.model.ShopDAO;
 
 /**
- * Servlet implementation class MemberListServlet
+ * Servlet implementation class MemberModifyServlet
  */
-@WebServlet("/memberList")
-public class MemberListServlet extends HttpServlet {
+@WebServlet("/memberModify")
+public class MemberModifyServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberListServlet() {
+    public MemberModifyServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,12 +35,15 @@ public class MemberListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ShopDAO dao = ShopDAO.getInstance();
 		
-		List<MemberDTO> list = dao.memberList();
+		int custno = Integer.parseInt(request.getParameter("custno"));
 		
-		request.setAttribute("list", list);
+		MemberDTO dto = dao.getMember(custno);
+		List<CityDTO> list = dao.cityList();
 		
+		request.setAttribute("dto", dto);
+		request.setAttribute("list", list);//도시코드
 		
-		RequestDispatcher rd = request.getRequestDispatcher("list.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("member_modify.jsp");
 		rd.forward(request, response);
 
 	

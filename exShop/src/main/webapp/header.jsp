@@ -14,7 +14,7 @@
 	.nav ul,li{float:left; padding:0 20px; text-align:center;}
 	.content {background-color:#E6E6E6; padding:16px;}
 	.title {text-align:center;padding:22px;}
-	.content table{width:550px;margin:0 auto;}
+	.content table{width:700px;margin:0 auto;}
 	.content table th, td{border:1px solid #bbb;}
 	.content table .btn_group {text-align:center;}
 	.footer {padding:16px 0; text-align:center; background-color:#0040FF;}
@@ -27,11 +27,11 @@
 			<div class="nav">
 				<nav>
 					<ul class="navi">
-						<li><a href="member_write">회원등록</a></li>
-						<li><a href="member_list">회원목록조회</a></li>
-						<li><a href="">회원매출조회</a></li>
-						<li><a href="">회원정보검색</a></li>
-						<li><a href="">회원정보검색</a></li>
+						<li><a href="memberWrite">회원등록</a></li>
+						<li><a href="memberList">회원목록조회</a></li>
+						<li><a href="moneyWrite">매출등록</a></li>
+						<li><a href="Test">회원정보검색</a></li>
+						<li><a href="o">회원정보검색</a></li>
 						<li><a href="/">홈으로</a></li>
 						<li><a href="member_register">회원가입</a></li>
 					</ul>

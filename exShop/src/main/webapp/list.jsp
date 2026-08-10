@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*, com.mnu.exshop.model.*" %>
+
+<%
+	List<MemberDTO> list = (List<MemberDTO>)request.getAttribute("list");	
+%>    
 <!doctype html>
 <html lang="en">
  <head>
@@ -42,114 +47,32 @@
 						<th>고객등급</th>
 						<th>거주지역</th>
 					</tr>
+		<%
+			if(list.size()==0){
+		%>			
 					<tr class="text_center">
-						<td class="white">1001</td>
-						<td>박민우</td>
-						<td>상무</td>
-						<td>010-1234-5678</td>
-						<td>2017-02-03</td>
-						<td></td>
-						<td>01</td>
-					</tr>
+						<td class="white" colspan="7">
+							등록된 자료가 없음
+						</td>
+					</tr>		
+		<% 
+			}else{ 
+				for(MemberDTO dto : list){
+		
+		%>
 					<tr class="text_center">
-						<td class="white"> ..</td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
+						<td class="white"><a href="/memberModify?custno=<%=dto.getCustno() %>"><%= dto.getCustno() %></a></td>
+						<td><a href="/memberModify?custno=<%=dto.getCustno() %>"><%= dto.getCustname() %></a></td>
+						<td><%= dto.getPhone() %></td>
+						<td><%= dto.getGender() %></td>
+						<td><%= dto.getJoindate() %></td>
+						<td><%= dto.getGrade() %></td>
+						<td><%= dto.getCityname() %></td>
 					</tr>
-					<tr class="text_center">
-						<td class="white"> ..</td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-					</tr>
-					<tr class="text_center">
-						<td class="white"> ..</td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-					</tr>
-					<tr class="text_center">
-						<td class="white"> ..</td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-					</tr>
-					<tr class="text_center">
-						<td class="white"> ..</td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-					</tr>
-					<tr class="text_center">
-						<td class="white"> ..</td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-					</tr>
-					<tr class="text_center">
-						<td class="white"> ..</td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-					</tr>
-					<tr class="text_center">
-						<td class="white"> ..</td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-					</tr>
-					<tr class="text_center">
-						<td class="white"> ..</td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-					</tr>
-					<tr class="text_center">
-						<td class="white"> ..</td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-						<td> . . </td>
-					</tr>
-					<tr class="text_center">
-						<td class="white">1006</td>
-						<td>이광주</td>
-						<td>과장</td>
-						<td>010-3333-1111</td>
-						<td>2018-07-08</td>
-						<td>2019-05-25</td>
-						<td>04</td>
-					</tr>
+		<%
+				}
+			}
+		%>			
 					<tr>
 						<td colspan="7" class="btn_group">
 							<input type="submit" value="확인">

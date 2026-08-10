@@ -1,7 +1,6 @@
 package com.mnu.exshop.servlet;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,20 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mnu.exshop.model.MemberDTO;
-import com.mnu.exshop.model.ShopDAO;
-
 /**
- * Servlet implementation class MemberListServlet
+ * Servlet implementation class MoneyWriteServlet
  */
-@WebServlet("/memberList")
-public class MemberListServlet extends HttpServlet {
+@WebServlet("/moneyWrite")
+public class MoneyWriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MemberListServlet() {
+    public MoneyWriteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,17 +28,10 @@ public class MemberListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ShopDAO dao = ShopDAO.getInstance();
 		
-		List<MemberDTO> list = dao.memberList();
-		
-		request.setAttribute("list", list);
-		
-		
-		RequestDispatcher rd = request.getRequestDispatcher("list.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("money_write.jsp");
 		rd.forward(request, response);
 
-	
 	}
 
 	/**

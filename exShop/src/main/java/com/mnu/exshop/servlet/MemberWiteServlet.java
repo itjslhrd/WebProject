@@ -11,12 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mnu.exshop.model.CityDTO;
+import com.mnu.exshop.model.MemberDTO;
 import com.mnu.exshop.model.ShopDAO;
 
 /**
  * Servlet implementation class MemberWiteServlet
  */
-@WebServlet("/member_write")
+@WebServlet("/memberWrite")
 public class MemberWiteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -49,8 +50,30 @@ public class MemberWiteServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-	
+		request.setCharacterEncoding("utf-8");
+		
+		ShopDAO dao = ShopDAO.getInstance();
+		MemberDTO dto = new MemberDTO();
+		
+		dto.setCustno(Integer.parseInt(request.getParameter("custno")));
+		dto.setCustname(request.getParameter("custname"));
+		dto.setPhone(request.getParameter("phone1")+"-" + 
+				request.getParameter("phone2")+"-" +
+				request.getParameter("phone3"));
+		dto.setGender(request.getParameter("gender"));
+		dto.setJoindate(request.getParameter("joindate"));
+		dto.setGrade(request.getParameter("grade"));
+		dto.setCity(request.getParameter("city"));
+		
+		//등록 메소드 호출
+		int row = dao.memberWrite(dto);
+		//인덱스로 바로 이동할 경우
+		//response.sendRedirect("/");
+		
+		// 경고창 별도 생성시
+		request.setAttribute("row", row);
+		RequestDispatcher rd = request.getRequestDispatcher("insert_pro.jsp");
+		rd.forward(request, response);
 	}
 
 }

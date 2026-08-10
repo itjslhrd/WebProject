@@ -8,6 +8,14 @@ public class MemberDTO {
 	private String joindate;
 	private String grade;
 	private String city;
+	private String cityname;
+	
+	public String getCityname() {
+		return cityname;
+	}
+	public void setCityname(String cityname) {
+		this.cityname = cityname;
+	}
 	public int getCustno() {
 		return custno;
 	}
