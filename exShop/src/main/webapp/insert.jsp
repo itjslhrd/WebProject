@@ -6,8 +6,6 @@
 	int custno = (int)request.getAttribute("custno");
 	List<CityDTO> list = (List<CityDTO>)request.getAttribute("list");
 	
-	out.print("custno : " + custno +"<br>");
-	out.print("list: " + list.size() +"<br>");
 %>    
     
 <!DOCTYPE html>
