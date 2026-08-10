@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*" %>
+<%@ page import="com.mnu.exshop.model.*" %>    
+<%
+	int custno = (int)request.getAttribute("custno");
+	List<CityDTO> list = (List<CityDTO>)request.getAttribute("list");
+	
+	out.print("custno : " + custno +"<br>");
+	out.print("list: " + list.size() +"<br>");
+%>    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -123,16 +133,6 @@
 									<select name="city">
 										<option>도시코드</option>
 										<option value="01">서울</option>
-										<option value="02">경기</option>
-										<option value="03">인천</option>
-										<option value="04">강원</option>
-										<option value="05">충북</option>
-										<option value="06">충남</option>
-										<option value="07">전북</option>
-										<option value="08">전남</option>
-										<option value="09">경북</option>
-										<option value="10">경남</option>
-										<option value="11">제주</option>
 									</select>								
 								</td>
 							</tr>

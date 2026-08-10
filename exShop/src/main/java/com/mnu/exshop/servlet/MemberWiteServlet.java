@@ -1,6 +1,7 @@
 package com.mnu.exshop.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,6 +9,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.mnu.exshop.model.CityDTO;
+import com.mnu.exshop.model.ShopDAO;
 
 /**
  * Servlet implementation class MemberWiteServlet
@@ -28,7 +32,14 @@ public class MemberWiteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		ShopDAO dao = ShopDAO.getInstance();
+		
+		int custno = dao.custMax();
+		List<CityDTO> list = dao.cityList();
+		
+		request.setAttribute("custno", custno);
+		request.setAttribute("list", list);
+		
 		RequestDispatcher rd = request.getRequestDispatcher("insert.jsp");
 		rd.forward(request, response);
 

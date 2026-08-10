@@ -12,6 +12,12 @@
 	.logo {color:#fff; text-align:center; background-color:#0040FF; padding:16px 0;}
 	.nav{padding:12px 0; overflow:hidden;background-color:#BCA9F5;}
 	.nav ul,li{float:left; padding:0 20px; text-align:center;}
+	.content {background-color:#E6E6E6; padding:16px;}
+	.title {text-align:center;padding:22px;}
+	.content table{width:550px;margin:0 auto;}
+	.content table th, td{border:1px solid #bbb;}
+	.content table .btn_group {text-align:center;}
+	.footer {padding:16px 0; text-align:center; background-color:#0040FF;}
 </style>
 
 </head>
@@ -25,7 +31,9 @@
 						<li><a href="member_list">회원목록조회</a></li>
 						<li><a href="">회원매출조회</a></li>
 						<li><a href="">회원정보검색</a></li>
+						<li><a href="">회원정보검색</a></li>
 						<li><a href="/">홈으로</a></li>
+						<li><a href="member_register">회원가입</a></li>
 					</ul>
 				</nav>			
 			</div>
