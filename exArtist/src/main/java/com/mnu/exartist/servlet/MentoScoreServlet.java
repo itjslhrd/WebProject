@@ -1,6 +1,7 @@
 package com.mnu.exartist.servlet;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,19 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mnu.exartist.model.ArtistDAO;
-import com.mnu.exartist.model.ArtistDTO;
+import com.mnu.exartist.model.MentoScoreDTO;
 
 /**
- * Servlet implementation class ArtistWrite
+ * Servlet implementation class MentoScoreServlet
  */
-@WebServlet("/artistWrite.do")
-public class ArtistWrite extends HttpServlet {
+@WebServlet("/mentoScore")
+public class MentoScoreServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ArtistWrite() {
+    public MentoScoreServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,8 +32,13 @@ public class ArtistWrite extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//등록 폼
-		RequestDispatcher rd = request.getRequestDispatcher("insert.jsp");
+		ArtistDAO dao = ArtistDAO.getInstance();
+		
+		List<MentoScoreDTO> list = dao.mentoScoreList();
+		
+		request.setAttribute("list", list);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("mentoScoreList.jsp");
 		rd.forward(request, response);
 
 	}
@@ -41,27 +47,8 @@ public class ArtistWrite extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//등록처리
-		request.setCharacterEncoding("utf-8");
-		
-		ArtistDAO dao = ArtistDAO.getInstance();
-		ArtistDTO dto = new ArtistDTO();
-		
-		dto.setArtist_id(request.getParameter("artist_id"));
-		dto.setArtist_name(request.getParameter("artist_name"));
-		dto.setArtist_gender(request.getParameter("artist_gender"));
-		
-		dto.setArtist_birth(request.getParameter("year")+
-				request.getParameter("month")+
-				request.getParameter("day"));
-		
-		dto.setTalent(request.getParameter("talent"));
-		dto.setAgency(request.getParameter("agency"));
-		
-		int row = dao.artistWrite(dto);
-		
-		response.sendRedirect("/");
-		
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

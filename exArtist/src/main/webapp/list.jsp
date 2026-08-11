@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.*, com.mnu.exartist.model.*" %>
 
+<%
+	List<ArtistDTO> list = (List<ArtistDTO>)request.getAttribute("list");
+
+%>
 <%@ include file="header.jsp" %>	
 	
 	<div class="section">
@@ -16,15 +21,21 @@
 						<th>특기</th>
 						<th>소속사</th>
 					</tr>
+		<%
+			
+			for(int i=0; i<list.size(); i++){
+		%>			
 					<tr class="text_center">
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td><%= list.get(i).getArtist_id() %></td>
+						<td><%= list.get(i).getArtist_name() %></td>
+						<td><%= list.get(i).getArtist_birth() %></td>
+						<td><%= list.get(i).getArtist_gender() %></td>
+						<td><%= list.get(i).getTalent() %></td>
+						<td><%= list.get(i).getAgency() %></td>
 					</tr>
-				
+		<%
+			}
+		%>		
 				</table>	
 			</div>
 		</section>

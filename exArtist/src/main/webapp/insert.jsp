@@ -84,14 +84,14 @@
 						<th>성별</th>
 						<td>
 							<input type="radio" name="artist_gender" value="M">남성
-							<input type="radio" name="artist_gender" value="W">여성
+							<input type="radio" name="artist_gender" value="F">여성
 						</td>
 					</tr>
 					<tr>
 						<th>특기</th>
 						<td>
 							<select name="talent">
-								<option value="0">특기선택</option>
+								<option >특기선택</option>
 								<option value="1">댄스</option>
 								<option value="2">랩</option>
 								<option value="3">노래</option>
