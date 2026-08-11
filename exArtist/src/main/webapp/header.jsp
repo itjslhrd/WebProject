@@ -35,6 +35,7 @@
 					<li><a href="artistList.do">참가자목록조회</a></li>
 					<li><a href="artistSearch.do">참가자검색</a></li>
 					<li><a href="mentoScore.do">멘토점수조회</a></li>
+					<li><a href="mentoScoreSearch.do">채점번호조회</a></li>
 					<li><a href="artistRankList.do">참가자등수조회</a></li>
 					<li><a href="/">홈으로</a></li>
 				</ul>
