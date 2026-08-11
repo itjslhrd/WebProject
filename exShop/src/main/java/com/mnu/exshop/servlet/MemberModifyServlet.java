@@ -53,8 +53,26 @@ public class MemberModifyServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		ShopDAO dao  = ShopDAO.getInstance();
+		MemberDTO dto = new MemberDTO();
+		
+		dto.setCustno(Integer.parseInt(request.getParameter("custno")));
+		//dto.setCustname(request.getParameter("custname"));
+		dto.setPhone(request.getParameter("phone1")+"-" + 
+				request.getParameter("phone2")+"-" +
+				request.getParameter("phone3"));
+		dto.setGender(request.getParameter("gender"));
+		dto.setJoindate(request.getParameter("joindate"));
+		dto.setGrade(request.getParameter("grade"));
+		dto.setCity(request.getParameter("city"));
+
+		System.out.println("도시코드 : " + dto.getCity());
+		
+		int row = dao.memberModify(dto);
+		
+		response.sendRedirect("/memberList");//
+	
+	
 	}
 
 }

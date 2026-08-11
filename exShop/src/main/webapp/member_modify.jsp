@@ -78,6 +78,13 @@
 		frm.reset();
 		frm.custname.focus();
 	}
+	
+	function mem_del(custno){
+		var flag = confirm("삭제할가요");
+		if(flag){
+			location.href="memberDelete?custno="+custno;
+		}
+	}
 </script>
 
 </head>
@@ -109,7 +116,7 @@
 							<tr>
 								<th>회원성별</th>
 								<td><input type="radio" name="gender" value="M" <%= mdto.getGender().equals("M") ? "checked" : "" %>>남자
-								    <input type="radio" name="gender" value="W" <%= mdto.getGender().equals("F") ? "checked" : "" %>>여자
+								    <input type="radio" name="gender" value="F" <%= mdto.getGender().equals("F") ? "checked" : "" %>>여자
 								</td>
 							</tr>
 							<tr>
@@ -146,6 +153,7 @@
 								<td colspan="2" class="btn_group">
 									<input type="button" value="수정" onClick="send()">
 									<input type="button" value="취소" onClick="history.back()">
+									<input type="button" value="삭제" onClick="mem_del('<%=mdto.getCustno()%>')">
 								</td>
 							</tr>
 						</table>
