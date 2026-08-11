@@ -106,5 +106,72 @@ public class ArtistDAO {
 		return list;
 		
 	}
+
+	//참가자 등수 조회
+	public List<ArtistRankDTO> artistRankList(){
+		List<ArtistRankDTO> list = new ArrayList();
+		String sql="select a.artist_id, artist_name,artist_gender, sum(point) tot, round(avg(point),2) ave\r\n"
+				+ "            from tbl_artist_201905 a join tbl_point_201905 p\r\n"
+				+ "                            on a.artist_id=p.artist_id\r\n"
+				+ "                                    group by a.artist_id, artist_name,artist_gender\r\n"
+				+ "                                        order by tot desc";
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ArtistRankDTO dto = new ArtistRankDTO();
+				dto.setArtist_id(rs.getString("artist_id"));
+				dto.setArtist_name(rs.getString("artist_name"));
+				dto.setArtist_gender(rs.getString("artist_gender"));
+				dto.setTot(rs.getInt("tot"));
+				dto.setAve(rs.getDouble("ave"));
+				
+				list.add(dto);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return list;
+	}
+
+	//참가자 검색
+	public List<MentoScoreDTO> artistSearch(String artist_id){
+		List<MentoScoreDTO> list = new ArrayList();
+		String sql="select a.artist_id, artist_name, artist_birth, mento_name, point from\r\n"
+				+ "        tbl_artist_201905 a join tbl_point_201905 p\r\n"
+				+ "                on a.artist_id=p.artist_id \r\n"
+				+ "                    join tbl_mento_201905 m\r\n"
+				+ "                            on p.mento_id=m.mento_id\r\n"
+				+ "                        where upper(a.artist_id)=?";
+		
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, artist_id);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				MentoScoreDTO dto = new MentoScoreDTO();
+				dto.setArtist_id(rs.getString("artist_id"));
+				dto.setArtist_name(rs.getString("artist_name"));
+				dto.setArtist_birth(rs.getString("artist_birth"));
+				dto.setMento_name(rs.getString("mento_name"));
+				dto.setPoint(rs.getInt("point"));
+				
+				list.add(dto);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return list;
+	}
 	
 }

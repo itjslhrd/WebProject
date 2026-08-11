@@ -14,16 +14,16 @@ import com.mnu.exartist.model.ArtistDAO;
 import com.mnu.exartist.model.MentoScoreDTO;
 
 /**
- * Servlet implementation class MentoScoreServlet
+ * Servlet implementation class ArtistSearchServlet
  */
-@WebServlet("/mentoScore.do")
-public class MentoScoreServlet extends HttpServlet {
+@WebServlet("/artistSearch.do")
+public class ArtistSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MentoScoreServlet() {
+    public ArtistSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,23 +32,29 @@ public class MentoScoreServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		ArtistDAO dao = ArtistDAO.getInstance();
+		request.setAttribute("artist_id", "");
 		
-		List<MentoScoreDTO> list = dao.mentoScoreList();
-		
-		request.setAttribute("list", list);
-		
-		RequestDispatcher rd = request.getRequestDispatcher("mentoScoreList.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("artistSearch.jsp");
 		rd.forward(request, response);
-
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
+		String artist_id = request.getParameter("artist_id").toUpperCase();
+		
+		ArtistDAO dao = ArtistDAO.getInstance();
+		
+		List<MentoScoreDTO> list = dao.artistSearch(artist_id);
+		
+		request.setAttribute("artist_id", artist_id);
+		request.setAttribute("list", list);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("artistSearch.jsp");
+		rd.forward(request, response);
+		
 	}
 
 }

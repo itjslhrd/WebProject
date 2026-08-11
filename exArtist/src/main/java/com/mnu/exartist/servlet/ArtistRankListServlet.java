@@ -11,19 +11,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mnu.exartist.model.ArtistDAO;
-import com.mnu.exartist.model.MentoScoreDTO;
+import com.mnu.exartist.model.ArtistRankDTO;
 
 /**
- * Servlet implementation class MentoScoreServlet
+ * Servlet implementation class ArtistRankListServlet
  */
-@WebServlet("/mentoScore.do")
-public class MentoScoreServlet extends HttpServlet {
+@WebServlet("/artistRankList.do")
+public class ArtistRankListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MentoScoreServlet() {
+    public ArtistRankListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,13 +32,14 @@ public class MentoScoreServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		ArtistDAO dao = ArtistDAO.getInstance();
 		
-		List<MentoScoreDTO> list = dao.mentoScoreList();
+		List<ArtistRankDTO> list = dao.artistRankList();
 		
 		request.setAttribute("list", list);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("mentoScoreList.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("artistRankList.jsp");
 		rd.forward(request, response);
 
 	}
