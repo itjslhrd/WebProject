@@ -1,0 +1,111 @@
+package com.mnu.student.model;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.mnu.student.util.DBManager;
+
+public class StudentDAO {
+	//싱글톤
+	private StudentDAO() {} // 생성자
+	private static StudentDAO instance = new StudentDAO();//객체 생성
+	public static StudentDAO getInstance() {
+		return instance;
+	}
+	
+	Connection conn = null;
+	PreparedStatement pstmt = null;
+	ResultSet rs = null;
+	
+	// 학생 등록 메소드
+	public int studentWrite(StudentDTO dto) {
+		int row=0;
+		String sql="insert into tbl_student_201905(syear, sclass, sno, sname, birth, gender, tel1, tel2, tel3) "
+				+ "values(?,?,?,?,?,?,?,?,?)";
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getSyear());
+			pstmt.setString(2, dto.getSclass());
+			pstmt.setString(3, dto.getSno());
+			pstmt.setString(4, dto.getSname());
+			pstmt.setString(5, dto.getBirth());
+			pstmt.setString(6, dto.getGender());
+			pstmt.setString(7, dto.getTel1());
+			pstmt.setString(8, dto.getTel2());
+			pstmt.setString(9, dto.getTel3());
+			
+			row = pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt);
+		}
+		return row;
+	}
+	
+	// 학생 성적 메소드
+	public int scoreWrite(ScoreDTO dto) {
+		int row=0;
+		String sql="insert into tbl_score_201905(syear, sclass, sno, kor, eng, mat) "
+				+ "values(?,?,?,?,?,?)";
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, dto.getSyear());
+			pstmt.setString(2, dto.getSclass());
+			pstmt.setString(3, dto.getSno());
+			pstmt.setInt(4, dto.getKor());
+			pstmt.setInt(5, dto.getEng());
+			pstmt.setInt(6, dto.getMat());
+			
+			row = pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt);
+		}
+		return row;
+	}
+
+	// 학생 성적 조회
+	public List<StudentScoreDTO> scoreList() {
+		List<StudentScoreDTO> list = new ArrayList();
+		String sql="select t1.syear,t1.sclass,t1.sno,sname,gender,kor,eng,mat \r\n"
+				+ "        from tbl_student_201905 t1 join tbl_score_201905 t2\r\n"
+				+ "                on t1.syear=t2.syear and t1.sclass=t2.sclass and t1.sno=t2.sno";
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				StudentScoreDTO dto = new StudentScoreDTO();
+				dto.setSyear(rs.getString("syear"));
+				dto.setSclass(rs.getString("sclass"));
+				dto.setSno(rs.getString("sno"));
+				dto.setSname(rs.getString("sname"));
+				dto.setGender(rs.getString("gender"));
+				dto.setKor(rs.getInt("kor"));
+				dto.setEng(rs.getInt("eng"));
+				dto.setMat(rs.getInt("mat"));
+
+				list.add(dto);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt, rs);//select
+		}
+		return list;
+	}
+	
+}

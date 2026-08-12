@@ -7,7 +7,7 @@
 		<section>
 			<div class="content">
 				<h2 class="title">성적 입력</h2>
-					<form>
+					<form name="student" method="post" >
 						<table>
 							<tr>
 								<th>학년</th>

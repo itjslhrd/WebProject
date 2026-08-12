@@ -7,7 +7,7 @@
 		<section>
 			<div class="content">
 				<h2 class="title">학생등록</h2>
-					<form>
+					<form name="student" method="post">
 						<table>
 							<tr>
 								<th>학년</th>
@@ -68,7 +68,7 @@
 							</tr>
 							<tr>
 								<td colspan=2 class="btn_group">
-									<input type="button" value="학생등록">
+									<input type="button" value="학생등록" onClick="student_write()">
 									<input type="button" value="다시쓰기">
 								</td>
 							</tr>
@@ -90,3 +90,11 @@
 	</div>
 </body>
 </html>
+<script>
+	function student_write(){
+		
+		alert("등록합니다");
+		student.action="studentWrite.do";
+		student.submit();
+	}
+</script>
