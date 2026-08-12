@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@ include file="header.jsp" %>	
 
@@ -19,17 +21,19 @@
 						<th>영어평균</th>
 						<th>수학평균</th>
 					</tr>
+			<c:forEach var="dto" items="${list}">		
 					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td>${dto.syear}</td>
+						<td>${dto.sclass}</td>
+						<td>${dto.tname}</td>
+						<td>${dto.tkor}</td>
+						<td>${dto.teng}</td>
+						<td>${dto.tmat}</td>
+						<td><fmt:formatNumber pattern="#.00" value="${dto.akor}"/></td>
+						<td><fmt:formatNumber pattern="#.00" value="${dto.aeng}"/></td>
+						<td><fmt:formatNumber pattern="#.00" value="${dto.amat}"/></td>
 					</tr>
+			</c:forEach>		
 				</table>
 
 			</div>

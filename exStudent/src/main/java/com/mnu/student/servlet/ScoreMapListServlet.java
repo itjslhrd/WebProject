@@ -1,7 +1,9 @@
 package com.mnu.student.servlet;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,20 +12,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mnu.student.model.ClassTotalDTO;
+import com.mnu.student.model.ScoreDTO;
 import com.mnu.student.model.StudentDAO;
+import com.mnu.student.model.StudentDTO;
+import com.mnu.student.model.StudentScoreDTO;
 
 /**
- * Servlet implementation class ClassTotalServlet
+ * Servlet implementation class ScoreListServlet
  */
-@WebServlet("/classTotal.do")
-public class ClassTotalServlet extends HttpServlet {
+@WebServlet("/scoreMapList.do")
+public class ScoreMapListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ClassTotalServlet() {
+    public ScoreMapListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,11 +38,11 @@ public class ClassTotalServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		StudentDAO studentDAO = StudentDAO.getInstance();
 		
-		List<ClassTotalDTO> list = studentDAO.classTotal();
+		Map<StudentDTO,ScoreDTO> map = studentDAO.scoreMapList();
 		
-		request.setAttribute("list", list);
-
-		RequestDispatcher rd = request.getRequestDispatcher("classTotal.jsp");
+		request.setAttribute("map", map);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("scoreMapList.jsp");
 		rd.forward(request, response);
 
 	}

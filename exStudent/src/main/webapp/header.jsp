@@ -33,7 +33,8 @@
 				<ul class="navi">
 					<li><a href="studentWrite.do">학생등록</a></li>
 					<li><a href="scoreWrite.do">성적입력</a></li>
-					<li><a href="scoreList.do">성적조회</a></li>
+					<li><a href="scoreList.do">성적조회(List)</a></li>
+					<li><a href="scoreMapList.do">성적조회(Map)</a></li>
 					<li><a href="classTotal.do">반별통계</a></li>
 					<li><a href="/">홈으로</a></li>
 				</ul>
