@@ -32,10 +32,10 @@
 			<c:set var="tkor" value="0"/>
 			<c:set var="teng" value="0"/>
 			<c:set var="tmat" value="0"/>
-			<c:forEach var="map" items="${map}">
+			<c:forEach var="map" items="${map}" varStatus="st">
 				<c:set var="tkor" value="${tkor + map.value.kor }"/>
 					<tr>
-						<td style="text-align:center">${map.key.syear}-${map.key.sclass}-${map.key.sno}</td>
+						<td style="text-align:center">${st.count}/${map.key.syear}-${map.key.sclass}-${map.key.sno}</td>
 						<td class="tdtext">${map.key.sname}</td>
 						<td>${map.key.gender=='M' ? "남자" : "여자"}</td>
 						<td>${map.value.kor}</td>
