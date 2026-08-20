@@ -132,5 +132,49 @@ public class BoardDAO {
 		}
 		return bDTO;
 	}
-		
+
+	//글 수정 메소드
+	public int boardModify(BoardDTO bDTO){
+		int row = 0;
+		String sql="update tbl_board set email=?, subject=?, contents=? "
+				+ "	where idx=? and pass=?";
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, bDTO.getEmail());
+			pstmt.setString(2, bDTO.getSubject());
+			pstmt.setString(3, bDTO.getContents());
+			pstmt.setInt(4, bDTO.getIdx());
+			pstmt.setString(5, bDTO.getPass());
+			
+			row = pstmt.executeUpdate();
+
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return row;
+	}
+
+	//글 삭제 메소드
+	public int boardDelete(int idx, String pass){
+		int row = 0;
+		String sql="delete from tbl_board where idx=? and pass=?";
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.setString(2, pass);
+			
+			row = pstmt.executeUpdate();
+
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return row;
+	}
+	
 }

@@ -5,8 +5,36 @@
 <html>
    <head><title>게시판 작성</title>
     <link rel="stylesheet" type="text/css" href="/stylesheet.css">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>    
+
 <script>
 	//JQuery + AjAX(비동기 데이터 전송방식)
+	$(function(){
+		$("#btn_send").click(function(){
+			if($("#subject").val()==''){
+				alert("제목을 입력하세요");
+				$("#subject").focus();
+				return;
+			}
+			if($("#contents").val()==''){
+				alert("내용을 입력하세요");
+				$("#contents").focus();
+				return;
+			}
+			if($("#pass").val()==''){
+				alert("비밀번호을 입력하세요");
+				$("#pass").focus();
+				return;
+			}
+			
+			$("#board").submit();
+		});
+		
+		$("#btn_cancle").click(function(){
+			history.back();
+		});
+
+	});
 	
 	//전통적인 스크립트 체크
 	function board_send(){
@@ -31,7 +59,7 @@
      <img src="/Images/img/bullet-03.gif"><font size="2" face="돋움" color="orange"> 잠깐</font> &nbsp;
      <img src="/Images/img/bullet-02.gif"><font size="2" face="돋움">는 필수 입력 사항입니다.</font><p>
      <form id="board" name="board" method="post" action="/Board?cmd=boardModifyPro">
-
+		<input type="hidden" name="idx" value="${bDTO.idx}">
 	  <table border="0">
        <tr>
          <td width="5%" align="right"><img src="/Images/img/bullet-02.gif"></td>

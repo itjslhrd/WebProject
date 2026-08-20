@@ -57,7 +57,7 @@
        <a href="/Board?cmd=boardModify&idx=${bDTO.idx}">
        <img src="/Images/img/edit.gif" border="0"></a>&nbsp;&nbsp;
          <!-- 삭제하기 -->
-       <a href="/Board?cmd=boardDelete"><img src="/Images/img/del.gif" border="0"></a>&nbsp;&nbsp;
+       <a href="javascript:board_delete()"><img src="/Images/img/del.gif" border="0"></a>&nbsp;&nbsp;
        <!-- 목록보기 -->
        <a href="/Board?cmd=boardList"><img src="/Images/img/list-2.gif" border="0"></a>&nbsp;&nbsp;
       </font>
@@ -67,3 +67,9 @@
   </body>
   </html>
 
+<script>
+	function board_delete(){
+		var url="/Board?cmd=boardDelete&idx=${bDTO.idx}"
+		window.open(url,"boardDelete","width=300, height=200");
+	}
+</script>

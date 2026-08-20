@@ -5,7 +5,8 @@
  <link rel="stylesheet" type="text/css" href="/stylesheet.css">
  </head>
  <body>
- <form method="post" >
+ <form name="board" method="post" action="/Board?cmd=boardDeletePro" >
+ <input type="hidden" name="idx" value="${idx}">
    <table border="0" cellpadding="0" cellspacing="0" width="300" align="center">
      <tr>
        <td height="50">
@@ -18,9 +19,17 @@
        <td valign="middle" height="40">
        <font size="2" face="돋움">
        비밀번호 <input type="password" name="pass" size="8"></font>
-       <input type="submit" value="삭제">
-       <input type="button" value="닫기"></td></tr>
+       <input type="button" value="삭제" onClick="board_delete()">
+       <input type="button" value="닫기" onClick="self.close()"></td></tr>
    </table>
    </form>
  </body>
  </html>
+
+ <script>
+ 	function board_delete(){
+ 		
+ 		alert("삭제합니다");
+ 		board.submit();
+ 	}
+ </script>
