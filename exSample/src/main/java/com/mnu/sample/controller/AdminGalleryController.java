@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mnu.sample.service.Action;
-import com.mnu.sample.service.admin.AdminListService;
-import com.mnu.sample.service.admin.AdminLoginService;
+import com.mnu.sample.service.admin.galley.GalleryListService;
+import com.mnu.sample.service.admin.galley.GalleryViewService;
 
 /**
  * Servlet implementation class AdminController
  */
-@WebServlet("/Admin")
-public class AdminController extends HttpServlet {
+@WebServlet("/Admin/Gallery")
+public class AdminGalleryController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminController() {
+    public AdminGalleryController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,10 +36,10 @@ public class AdminController extends HttpServlet {
 		System.out.println("관리자 요청 : " + cmd);
 		
 		Action action = null;
-		if(cmd.equals("adminLogin")) {
-			action = new AdminLoginService();
-		}else if(cmd.equals("adminList")) {
-			action = new AdminListService();
+		if(cmd.equals("galleryList")) {
+			action = new GalleryListService();
+		}else if(cmd.equals("galleryView")) {
+			action = new GalleryViewService();
 		}
 		
 		action.process(request, response);

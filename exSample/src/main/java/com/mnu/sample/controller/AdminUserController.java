@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.mnu.sample.service.Action;
-import com.mnu.sample.service.admin.AdminListService;
-import com.mnu.sample.service.admin.AdminLoginService;
+import com.mnu.sample.service.admin.user.UserListService;
+import com.mnu.sample.service.admin.user.UserViewService;
 
 /**
  * Servlet implementation class AdminController
  */
-@WebServlet("/Admin")
-public class AdminController extends HttpServlet {
+@WebServlet("/Admin/User")
+public class AdminUserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AdminController() {
+    public AdminUserController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,10 +36,10 @@ public class AdminController extends HttpServlet {
 		System.out.println("관리자 요청 : " + cmd);
 		
 		Action action = null;
-		if(cmd.equals("adminLogin")) {
-			action = new AdminLoginService();
-		}else if(cmd.equals("adminList")) {
-			action = new AdminListService();
+		if(cmd.equals("userList")) {
+			action = new UserListService();
+		}else if(cmd.equals("userView")) {
+			action = new UserViewService();
 		}
 		
 		action.process(request, response);
