@@ -18,11 +18,25 @@ public class BoardListService implements Action {
 	public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		BoardDAO bDAO = BoardDAO.getInstance();
 		
-		int totcount = bDAO.boardCount();//총 게시글 수
-		List<BoardDTO> bList = bDAO.boardList();//전체 글 목록
-		
+		String search="", key="";
+		int totcount = 0;
+		List<BoardDTO> bList = null;
+		if(request.getParameter("key") != null) {
+			//검색이용시
+			search = request.getParameter("search");
+			key = request.getParameter("key");
+			totcount = bDAO.boardCount(search, key);//총 게시글 수
+			bList = bDAO.boardList(search, key);//전체 글 목록			
+		}else {
+			//검색없이 모두 
+			totcount = bDAO.boardCount();//총 게시글 수
+			bList = bDAO.boardList();//전체 글 목록
+		}
+
 		request.setAttribute("totcount", totcount);
 		request.setAttribute("bList", bList);
+		request.setAttribute("search", search);
+		request.setAttribute("key", key);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/Board/board_list.jsp");
 		rd.forward(request, response);

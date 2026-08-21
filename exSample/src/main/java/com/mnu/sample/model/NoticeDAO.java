@@ -40,6 +40,28 @@ public class NoticeDAO {
 		return count;
 	}
 	
+	// 총 게시글 수 카운트 메소드(검색 추가)
+	public int noticeCount(String search, String key){
+		int count = 0;
+		String sql="select count(*) from tbl_notice where " + search + 
+				" like ?";
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + key + "%");
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return count;
+	}
 	
 	//전체 공지사항 목록(list)-(검색, 페이지인덱스 없음) 메소드
 	public List<NoticeDTO> noticeList(){
@@ -68,7 +90,37 @@ public class NoticeDAO {
 		}
 		return nList;
 	}
-	
+
+	//전체 공지사항 목록(list)-(검색 추가) 메소드
+	public List<NoticeDTO> noticeList(String search, String key){
+		List<NoticeDTO> nList = new ArrayList();
+		String sql="select * from tbl_notice where " + search + 
+				" like ? order by regdate desc";
+		try {
+			conn = DBManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%" + key + "%");
+			
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				NoticeDTO nDTO = new NoticeDTO();
+				nDTO.setIdx(rs.getInt("idx"));
+				nDTO.setAdid(rs.getString("adid"));				
+				nDTO.setSubject(rs.getString("subject"));
+				nDTO.setRegdate(rs.getString("regdate"));
+				nDTO.setReadcnt(rs.getInt("readcnt"));
+				
+				nList.add(nDTO);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			DBManager.close(conn, pstmt, rs);
+		}
+		return nList;
+	}
+
 	//공지사항 글 등록 메소드
 	public int noticeWrite(NoticeDTO nDTO){
 		int row = 0;

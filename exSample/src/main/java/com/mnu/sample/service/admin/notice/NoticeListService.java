@@ -17,12 +17,26 @@ public class NoticeListService implements Action {
 	@Override
 	public void process(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		NoticeDAO nDAO = NoticeDAO.getInstance();
+		String search="", key="";
 		
-		int totcount = nDAO.noticeCount();
-		List<NoticeDTO> nList = nDAO.noticeList();
+		
+		int totcount = 0;
+		List<NoticeDTO> nList = null;
+		
+		if(request.getParameter("key") != null) {
+			search = request.getParameter("search");
+			key = request.getParameter("key");
+			totcount = nDAO.noticeCount(search, key);
+			nList = nDAO.noticeList(search, key);
+		}else {
+			totcount = nDAO.noticeCount();
+			nList = nDAO.noticeList();			
+		}
 		
 		request.setAttribute("totcount", totcount);
 		request.setAttribute("nList", nList);
+		request.setAttribute("search", search);
+		request.setAttribute("key", key);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/Admin/notice_list.jsp");
 		rd.forward(request, response);

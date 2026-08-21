@@ -10,7 +10,16 @@
 <style type="text/css">
   a.list {text-decoration:none;color:black;font-size:10pt;}
 </style>
-
+<script>
+	function board_search(){
+		if(bSearch.key.value==""){
+			alert("검색어를 입력하세요");
+			bSearch.key.focus();
+			return;
+		}
+		bSearch.submit();
+	}
+</script>
 </head>
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
 <table border="0" width="800">
@@ -74,18 +83,18 @@
 			<td width="25%"> &nbsp;</td>
 			<td width="50%" align="center">
 				<table>
-					<form>	
+					<form id="bSearch" name="bSearch" method="post" action="/Board?cmd=boardList">	
 					<!-- 검색어를 이용하여 글제목, 작성자, 글내용 중에 하나를 입력 받아 처리하기 위한 부분 -->
 						<tr>
 							<td>
 								<select name="search">
-									<option value="">글제목</option>
-									<option value="">작성자</option>
-									<option value="">글내용</option>
+									<option value="subject" ${search=='subject' ? 'selected':''}>글제목</option>
+									<option value="name" ${search=='name' ? 'selected':''}>작성자</option>
+									<option value="contents" ${search=='contents' ? 'selected':''}>글내용</option>
 								</select>
 							</td>
-							<td> <input type="text" size=20 name=""></td>
-							<td> <a href="#"><img src="/Images/img/search2.gif" border="0"></a></td>
+							<td> <input type="text" size=20 name="key" value="${key}"></td>
+							<td> <img src="/Images/img/search2.gif" border="0" onClick="board_search()"></td>
 						</tr>
 					</form>
 				</table>

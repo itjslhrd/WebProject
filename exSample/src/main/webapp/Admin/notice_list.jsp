@@ -16,6 +16,16 @@ A:active {font-family:tahoma;font-size:9pt;color:#666666;text-decoration:none;}
 A:hover {font-family:tahoma;font-size:9pt;color:#009900;text-decoration:underline;} 
 --> 
 </style> 
+<script>
+	function notice_search(){
+		if(!nSearch.key.value){
+			alert("검색어를 입력하세요");
+			nSearch.key.focus();
+			return;
+		}
+		nSearch.submit();
+	}
+</script>
 </head>
 
 <body>
@@ -53,16 +63,17 @@ A:hover {font-family:tahoma;font-size:9pt;color:#009900;text-decoration:underlin
 	                     <tr>
                         <td height="35" colspan="10" align="center" bgcolor="#FFFFFF">[1][2][3]</td>
                       </tr>
-					<form action="notice.jsp" method="post" name="b_search">
+					<form action="/Admin/Notice?cmd=noticeList" method="post" name="nSearch">
                       <tr>
                         <td colspan="10" align="center" bgcolor="#FFFFFF"><table width="610" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                               <td width=80% height="30" colspan="2" align="right">
 								<select name="search" class="textfield">
-									<option >제목</option>
+									<option value="subject" ${search=='subject' ? 'selected' : ''}>제목</option>
+									<option value="contents" ${search=='contents' ? 'selected' : ''}>내용</option>
 								</select>
-								<input name="key" type="text" class="textfield" size="30" value=""></td>
-                              <td width=20% align="right"><a href=""><b>[검색]</b></a>  &nbsp;<a href="/Admin/Notice?cmd=noticeWrite"><b>[글쓰기]</b></a></td>
+								<input name="key" type="text" class="textfield" size="30" value="${key}"></td>
+                              <td width=20% align="right"><a href="javascript:notice_search()"><b>[검색]</b></a>  &nbsp;<a href="/Admin/Notice?cmd=noticeWrite"><b>[글쓰기]</b></a></td>
                             </tr>
 									
                         </table></td>
