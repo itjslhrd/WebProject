@@ -44,14 +44,15 @@ A:hover {font-family:tahoma;font-size:9pt;color:#009900;text-decoration:underlin
                <c:forEach var="nDTO" items="${nList}">       
                       <tr>
                         <td align="center" bgcolor="#FFFFFF">${nDTO.idx}</td>
-                        <td bgcolor="#FFFFFF"><a href="" class="unnamed1">${nDTO.subject}</a></td>
+                        <td bgcolor="#FFFFFF"><a href="/Admin/Notice?cmd=noticeView&idx=${nDTO.idx}" class="unnamed1">${nDTO.subject}</a></td>
                         <td align="center" bgcolor="#FFFFFF">${nDTO.regdate}</td>
 						<td align="center" bgcolor="#FFFFFF">${nDTO.readcnt}</td>
                       </tr>
+               </c:forEach>        
+                      
 	                     <tr>
                         <td height="35" colspan="10" align="center" bgcolor="#FFFFFF">[1][2][3]</td>
                       </tr>
-              </c:forEach>        
 					<form action="notice.jsp" method="post" name="b_search">
                       <tr>
                         <td colspan="10" align="center" bgcolor="#FFFFFF"><table width="610" border="0" cellspacing="0" cellpadding="0">

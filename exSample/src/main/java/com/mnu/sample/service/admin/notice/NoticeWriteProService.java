@@ -21,9 +21,12 @@ public class NoticeWriteProService implements Action {
 		nDTO.setContents(request.getParameter("contents"));
 		
 		int row = nDAO.noticeWrite(nDTO);
-		
+	
+		response.sendRedirect("/Admin/Notice?cmd=noticeList");
+/*		
 		RequestDispatcher rd = request.getRequestDispatcher("/Admin/notice_list.jsp");
 		rd.forward(request, response);
+*/		
 	}
 
 }

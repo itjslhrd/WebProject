@@ -19,7 +19,7 @@ public class BoardViewService implements Action {
 		int idx = Integer.parseInt(request.getParameter("idx"));
 		BoardDAO bDAO = BoardDAO.getInstance();
 		//조회수 증가 메소드 호출
-		bDAO.boardCount(idx);
+		bDAO.boardHits(idx);
 		
 		//idx에 해당하는 글 검색
 		BoardDTO bDTO = bDAO.boardSearch(idx);

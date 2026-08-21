@@ -95,7 +95,7 @@ public class BoardDAO {
 	}
 	
 	//조회수 증가 메소드
-	public void boardCount(int idx){
+	public void boardHits(int idx){
 		String sql="update tbl_board set readcnt=readcnt+1 where idx=?";
 		try {
 			conn = DBManager.getConnection();
